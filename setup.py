@@ -16,7 +16,7 @@ setup(
     name=name,
     version=version,
     license='apache-2.0',
-    description='Redis as dictionary',
+    description='Simplify DB API usage',
     long_description=readme,
     long_description_content_type='text/markdown',
     author=owner.capitalize(),
