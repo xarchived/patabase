@@ -11,7 +11,7 @@ class Database(object):
             password=password,
             database=database)
 
-    def _execute(self, cursor, query, parameters):
+    def _execute(self, cursor: pyodbc.Cursor, query: str, parameters: tuple) -> None:
         try:
             cursor.execute(query, parameters)
         except Exception as e:
