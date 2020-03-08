@@ -3,13 +3,18 @@ import pyodbc
 
 class Database(object):
     def __init__(self, server: str, user: str, password: str, database: str):
-        self._con = pyodbc.connect(
-            '',
-            driver='SQL Server',
-            server=server,
-            user=user,
-            password=password,
-            database=database)
+        for driver in pyodbc.drivers():
+            if 'SQL Server' in driver:
+                self._con = pyodbc.connect(
+                    '',
+                    driver=driver,
+                    server=server,
+                    user=user,
+                    password=password,
+                    database=database)
+
+        if not self._con:
+            raise Exception('Driver not found')
 
     def _execute(self, cursor: pyodbc.Cursor, query: str, parameters: tuple) -> None:
         try:
