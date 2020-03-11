@@ -28,7 +28,7 @@ class Database(object):
         args = [f'@{k}=?' for k in parameters]
 
         sql = f'''
-            exec {func_name} {''.join(args)}
+            exec {func_name} {', '.join(args)}
         '''
 
         return sql
