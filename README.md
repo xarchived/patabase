@@ -23,7 +23,7 @@ pip install -U patabase
 or if you prefer the latest development version, you can install it from the source:
 
 ```bash
-git clone https://github.com/xurvan/redisary.git
-cd redisary
+git clone https://github.com/xurvan/patabase.git
+cd patabase
 python setup.py install
 ```
