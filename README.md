@@ -27,3 +27,35 @@ git clone https://github.com/xurvan/patabase.git
 cd patabase
 python setup.py install
 ```
+
+## Quickstart
+SQL commands are usually categorized into DDL, DQL, DML, DCL and TCL but we are going to categorized them into different
+categories:
+    
+- Select: a command with output that is not going to change anything
+- Perform: a command without output that is going to change something
+- Function: a stored procedure with output
+- Procedure: a stored procedure without output
+
+so let us see some code:
+
+```python
+from patabase.postgres import Database
+
+db = Database(host='localhost', user='USERNAME', password='PASSWORD', database='DATABASE_NAME')
+
+db.perform('''
+create table users
+(
+    id          serial primary key not null,
+    name        varchar            not null,
+    username    varchar unique     not null,
+)
+''')
+
+rows = db.select('select * from users')
+
+for row in rows:
+    print(row)
+
+```
