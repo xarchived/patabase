@@ -1,7 +1,7 @@
 # Patabase
 Database API as it described in [PEP 249](https://www.python.org/dev/peps/pep-0249/) is a comprehensive API. It's 
 amazing and we can implement any advanced scenario with it. But for a simple task we don't need an advanced or
-comprehensive tool. We just need a simple tool to do the job for us. After all we all agreed that "Simple is better than
+comprehensive tool. We just need a simple tool to do the job for us. After all we all agree that "Simple is better than
 complex."
 
 ## Installation
