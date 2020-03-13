@@ -1,4 +1,5 @@
 import psycopg2
+import psycopg2.extras
 
 
 class Database(object):
@@ -32,7 +33,7 @@ class Database(object):
             return cur.rowcount
 
     def select(self, sql: str, *args: any) -> iter:
-        with self._con.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+        with self._con.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
             self._execute(cur, sql, args)
             rows = cur.fetchall()
 
@@ -47,7 +48,7 @@ class Database(object):
             return cur.rowcount
 
     def function(self, func_name: str, **parameters: any) -> iter:
-        with self._con.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+        with self._con.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
             self._callproc(cur, func_name, parameters)
             rows = cur.fetchall()
 
