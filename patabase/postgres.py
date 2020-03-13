@@ -4,7 +4,7 @@ import psycopg2
 class Database(object):
     def __init__(self, server: str, user: str, password: str, database: str):
         self._con = psycopg2.connect(
-            server=server,
+            host=server,
             user=user,
             password=password,
             database=database)
