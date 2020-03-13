@@ -4,6 +4,7 @@ amazing and we can implement any advanced scenario with it. But for a simple tas
 comprehensive tool. We just need a simple tool to do the job for us. After all we all agree that "Simple is better than
 complex."
 
+
 ## Installation
 We'd like to support all the databases, but we don't like to install all the drivers of all the databases. So first of
 all install and config your database driver then install corresponding python package:
@@ -27,6 +28,7 @@ git clone https://github.com/xurvan/patabase.git
 cd patabase
 python setup.py install
 ```
+
 
 ## Quickstart
 SQL commands are usually categorized into DDL, DQL, DML, DCL and TCL but we are going to categorized them into different
@@ -59,3 +61,12 @@ for row in rows:
     print(row)
 
 ```
+
+
+## TODO
+
+- [x] Support PostgreSQL
+- [x] Support Microsoft SQL Server
+- [ ] Support SQLite
+- [ ] Support MySQL
+- [ ] Support Oracle Database
