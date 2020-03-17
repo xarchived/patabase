@@ -3,9 +3,10 @@ import psycopg2.extras
 
 
 class Database(object):
-    def __init__(self, user: str, password: str, database: str, host: str = 'localhost'):
+    def __init__(self, user: str, password: str, database: str, host: str = 'localhost', port=5432):
         self._con = psycopg2.connect(
             host=host,
+            port=port,
             user=user,
             password=password,
             database=database)

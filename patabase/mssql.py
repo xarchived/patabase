@@ -2,13 +2,14 @@ import pyodbc
 
 
 class Database(object):
-    def __init__(self, user: str, password: str, database: str, host: str = 'localhost'):
+    def __init__(self, user: str, password: str, database: str, host: str = 'localhost', port=1433):
         for driver in pyodbc.drivers():
             if 'SQL Server' in driver:
                 self._con = pyodbc.connect(
                     '',
                     driver=driver,
                     server=host,
+                    port=port,
                     user=user,
                     password=password,
                     database=database)
