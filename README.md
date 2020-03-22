@@ -42,9 +42,9 @@ categories:
 so let us see some code:
 
 ```python
-from patabase.postgres import Database
+from patabase import Postgres
 
-db = Database(host='localhost', user='USERNAME', password='PASSWORD', database='DATABASE_NAME')
+db = Postgres(host='localhost', user='USERNAME', password='PASSWORD', database='DATABASE_NAME')
 
 db.perform('''
 create table users
