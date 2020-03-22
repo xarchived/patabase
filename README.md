@@ -51,7 +51,7 @@ create table users
 (
     id          serial primary key not null,
     name        varchar            not null,
-    username    varchar unique     not null,
+    username    varchar unique     not null
 )
 ''')
 
