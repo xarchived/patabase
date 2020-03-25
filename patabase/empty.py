@@ -1,5 +1,5 @@
 class Database(object):
-    def __init__(self, user: str, password: str, database: str, host: str = 'localhost', port=0):
+    def __init__(self, user: str, password: str, database: str, host: str = 'localhost', port=1):
         assert user
         assert password
         assert database
