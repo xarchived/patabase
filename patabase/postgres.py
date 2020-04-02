@@ -26,7 +26,6 @@ class Database(object):
             raise e
 
     def perform(self, sql: str, *args: any) -> int:
-
         with self._con.cursor() as cur:
             self._execute(cur, sql, args)
             self._con.commit()
@@ -36,6 +35,7 @@ class Database(object):
     def select(self, sql: str, *args: any) -> iter:
         with self._con.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
             self._execute(cur, sql, args)
+            self._con.commit()
             rows = cur.fetchall()
 
         for row in rows:
@@ -51,6 +51,7 @@ class Database(object):
     def function(self, func_name: str, **parameters: any) -> iter:
         with self._con.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
             self._callproc(cur, func_name, parameters)
+            self._con.commit()
             rows = cur.fetchall()
 
         for row in rows:
