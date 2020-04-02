@@ -39,7 +39,7 @@ class Database(object):
             rows = cur.fetchall()
 
         for row in rows:
-            yield row
+            yield dict(row)
 
     def procedure(self, func_name: str, **parameters: any) -> int:
         with self._con.cursor() as cur:
@@ -55,4 +55,4 @@ class Database(object):
             rows = cur.fetchall()
 
         for row in rows:
-            yield row
+            yield dict(row)
