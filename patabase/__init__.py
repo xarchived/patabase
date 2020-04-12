@@ -8,4 +8,4 @@ try:
 except ModuleNotFoundError:
     from .empty import Database as Postgres
 
-__version__ = '0.1.2.dev'
+__version__ = '0.2.0'
