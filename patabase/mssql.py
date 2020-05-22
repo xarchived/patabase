@@ -1,3 +1,5 @@
+from typing import Any, Iterator
+
 import pyodbc
 
 
@@ -34,14 +36,14 @@ class Database(object):
 
         return sql
 
-    def perform(self, sql: str, *args: any) -> int:
+    def perform(self, sql: str, *args: Any) -> int:
         with self._con.cursor() as cursor:
             self._execute(cursor, sql, args)
             self._con.commit()
 
             return cursor.rowcount
 
-    def select(self, sql: str, *args: any) -> iter:
+    def select(self, sql: str, *args: Any) -> iter:
         with self._con.cursor() as cursor:
             self._execute(cursor, sql, args)
             rows = cursor.fetchall()
@@ -50,12 +52,12 @@ class Database(object):
         for row in rows:
             yield dict(zip(columns, row))
 
-    def procedure(self, func_name: str, **parameters: any) -> int:
+    def procedure(self, func_name: str, **parameters: Any) -> int:
         sql = self._exec_sql(func_name, parameters)
 
         return self.perform(sql, *parameters.values())
 
-    def function(self, func_name: str, **parameters: any) -> iter:
+    def function(self, func_name: str, **parameters: Any) -> Iterator[dict]:
         sql = self._exec_sql(func_name, parameters)
 
         return self.select(sql, *parameters.values())
