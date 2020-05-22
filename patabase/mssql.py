@@ -43,7 +43,7 @@ class Database(object):
 
             return cursor.rowcount
 
-    def select(self, sql: str, *args: Any) -> iter:
+    def select(self, sql: str, *args: Any) -> Iterator[dict]:
         with self._con.cursor() as cursor:
             self._execute(cursor, sql, args)
             rows = cursor.fetchall()
