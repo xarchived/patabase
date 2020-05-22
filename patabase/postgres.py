@@ -5,7 +5,7 @@ import psycopg2.extras
 
 
 class Database(object):
-    def __init__(self, user: str, password: str, database: str, host: str = 'localhost', port=5432):
+    def __init__(self, user: str, password: str, database: str, host: str = 'localhost', port: int = 5432):
         self._con = psycopg2.connect(
             host=host,
             port=port,
