@@ -5,6 +5,15 @@ import pyodbc
 
 class Database(object):
     def __init__(self, user: str, password: str, database: str, host: str = 'localhost', port: int = 1433):
+        self.host = host
+        self.port = port
+        self.user = user
+        self.password = password
+        self.database = database
+
+        self._connect()
+
+    def _connect(self):
         self._con = None
 
         for driver in pyodbc.drivers():
@@ -12,11 +21,11 @@ class Database(object):
                 self._con = pyodbc.connect(
                     '',
                     driver=driver,
-                    server=host,
-                    port=port,
-                    user=user,
-                    password=password,
-                    database=database)
+                    server=self.host,
+                    port=self.port,
+                    user=self.user,
+                    password=self.password,
+                    database=self.database)
 
         if not self._con:
             raise Exception('Driver not found')
@@ -24,6 +33,9 @@ class Database(object):
     def _execute(self, cursor: pyodbc.Cursor, query: str, parameters: tuple) -> None:
         try:
             cursor.execute(query, parameters)
+        except pyodbc.OperationalError as e:
+            self._connect()
+            raise e
         except Exception as e:
             self._con.rollback()
             raise e
