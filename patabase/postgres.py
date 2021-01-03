@@ -1,4 +1,4 @@
-from typing import Any, Iterator
+from typing import Any, List
 
 import psycopg2
 import psycopg2.extras
@@ -34,14 +34,16 @@ class Database(object):
 
             return cur.rowcount
 
-    def select(self, sql: str, *args: Any) -> Iterator[dict]:
+    def select(self, sql: str, *args: Any) -> List[dict]:
+        rows = []
         with self._con.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
             self._execute(cur, sql, args)
             self._con.commit()
-            rows = cur.fetchall()
 
-        for row in rows:
-            yield dict(row)
+            for row in cur.fetchall():
+                rows.append(dict(row))
+
+        return rows
 
     def procedure(self, func_name: str, **parameters: Any) -> int:
         with self._con.cursor() as cur:
@@ -50,11 +52,13 @@ class Database(object):
 
             return cur.rowcount
 
-    def function(self, func_name: str, **parameters: Any) -> Iterator[dict]:
+    def function(self, func_name: str, **parameters: Any) -> List[dict]:
+        rows = []
         with self._con.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
             self._callproc(cur, func_name, parameters)
             self._con.commit()
-            rows = cur.fetchall()
 
-        for row in rows:
-            yield dict(row)
+            for row in cur.fetchall():
+                rows.append(dict(row))
+
+        return rows
