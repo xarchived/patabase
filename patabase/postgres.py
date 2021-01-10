@@ -20,7 +20,7 @@ def error_handler(func):
                     self._con.rollback()
                 if i == max_retries:
                     raise e
-                if err == 'terminating connection due to administrator command':
+                if isinstance(e, psycopg2.errors.AdminShutdown):
                     continue
                 if err == 'SSL SYSCALL error: EOF detected\n':
                     continue
